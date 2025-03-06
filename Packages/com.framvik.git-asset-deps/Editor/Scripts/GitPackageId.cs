@@ -53,5 +53,15 @@ namespace Framvik.GitAssets.Dependencies
             }
             return existingGitUrl.ToArray();
         }
+
+        /// <summary>
+        /// Returns the GitPackageId representing this Package.
+        /// </summary>
+        public static GitPackageId GetGitAssetDepsPackage()
+        {
+            var info = PackageInfo.FindForAssembly(typeof(GitPackageId).Assembly);
+            var split = info.packageId.Split('@');
+            return new GitPackageId { Id = split[0], URL = split[1] };
+        }
     }
 }

@@ -15,7 +15,7 @@ Simply add one of the following package URLs using the menu inside the Package M
 
 ### Git Asset Registry
 ```
-https://github.com/Framvik/Unity-Engine-Tools.git?path=/Packages/com.framvik.git-asset-registry
+https://github.com/Framvik/Unity-Git-Asset-Registry.git?path=/Packages/com.framvik.git-asset-registry
 ```
 Define your custom git asset collections and manage them with a simple menu.
 
@@ -24,7 +24,7 @@ TODO
 
 ### Git Asset Editor
 ```
-https://github.com/Framvik/Unity-Engine-Tools.git?path=/Packages/com.framvik.git-asset-editor
+https://github.com/Framvik/Unity-Git-Asset-Registry.git?path=/Packages/com.framvik.git-asset-editor
 ```
 Editor tools for collecting unity packages on git into embedded packages.
 
@@ -33,7 +33,7 @@ TODO
 
 ### Git Asset Dependencies
 ```
-https://github.com/Framvik/Unity-Engine-Tools.git?path=/Packages/com.framvik.git-asset-deps
+https://github.com/Framvik/Unity-Git-Asset-Registry.git?path=/Packages/com.framvik.git-asset-deps
 ```
 A simple way to automatically solve git package dependencies.
 

@@ -63,10 +63,11 @@ namespace Framvik.GitAssets.Dependencies
                     if (!string.IsNullOrEmpty(pkg))
                         addPackages.Add(pkg);
 
-            // so remove them
+            // remove all packages from package manager if not in GitDependencies (except for this Package)
+            var gitAssetPackageId = GitPackageId.GetGitAssetDepsPackage().Id;
             var removePackages = new HashSet<string>();
             foreach (var pkg in GitPackageId.GetLoadedGitPackages())
-                if (!string.IsNullOrEmpty(pkg.URL) && !addPackages.Contains(pkg.URL))
+                if (gitAssetPackageId != pkg.Id && !string.IsNullOrEmpty(pkg.URL) && !addPackages.Contains(pkg.URL))
                     removePackages.Add(pkg.Id);
 
             // only update if actual changes are needed
