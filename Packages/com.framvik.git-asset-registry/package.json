@@ -1,0 +1,7 @@
+{
+  "name": "com.framvik.git-asset-registry",
+  "version": "0.0.0",
+  "displayName": "Framvik Unity Git Asset Registry",
+  "description": "Implements a local package registry for managing git projects as assets and packages inside the Unity editor.",
+  "unity": "2022.3"
+}

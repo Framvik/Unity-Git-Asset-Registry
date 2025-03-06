@@ -1,0 +1,7 @@
+{
+  "name": "com.framvik.git-asset-editor",
+  "version": "0.0.0",
+  "displayName": "Framvik Unity Git Asset Editor",
+  "description": "Editor tools for collecting unity packages on git into embedded packages.",
+  "unity": "2022.3"
+}

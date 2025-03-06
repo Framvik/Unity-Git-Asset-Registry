@@ -1,0 +1,7 @@
+{
+  "name": "com.framvik.git-asset-deps",
+  "version": "1.0.0",
+  "displayName": "Framvik Unity Git Asset Dependencies",
+  "description": "Simple way to automatically solve git package dependencies.",
+  "unity": "2022.3"
+}
