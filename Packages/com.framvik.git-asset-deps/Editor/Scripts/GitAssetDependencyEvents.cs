@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.PackageManager;
 using System.IO;
 using System.Linq;
+using UnityEditor.PackageManager.Requests;
 
 namespace Framvik.GitAssets.Dependencies
 {
@@ -12,6 +13,9 @@ namespace Framvik.GitAssets.Dependencies
     /// </summary>
     public static class GitAssetDependencyEvents
     {
+        /// for tracking add and remove requests.
+        private static AddAndRemoveRequest m_AddAndRemoveRequest = null;
+
         [InitializeOnLoadMethod]
         private static void InitializeOnLoad()
         {
@@ -47,25 +51,33 @@ namespace Framvik.GitAssets.Dependencies
         }
 
         [MenuItem("Assets/Git Asset/Refresh Git Asset Dependencies", false, 250)]
-        public static void RefreshGitDependencies()
+        public static bool RefreshGitDependencies()
         {
+            if (CurrentlyPendingRefresh)
+                return false;
+
             // only git packages defined in GitDependencies should be allowed to exist
             var addPackages = new HashSet<string>();
             foreach (var dep in GitDependencies.FindAllDependencies())
                 foreach (var pkg in dep)
-                    addPackages.Add(pkg);
+                    if (!string.IsNullOrEmpty(pkg))
+                        addPackages.Add(pkg);
 
             // so remove them
             var removePackages = new HashSet<string>();
             foreach (var pkg in GitPackageId.GetLoadedGitPackages())
-                if (!addPackages.Contains(pkg.URL))
+                if (!string.IsNullOrEmpty(pkg.URL) && !addPackages.Contains(pkg.URL))
                     removePackages.Add(pkg.Id);
 
             // only update if actual changes are needed
             if (removePackages.Count > 0 || addPackages.Count > 0)
-                Client.AddAndRemove(
+                m_AddAndRemoveRequest = Client.AddAndRemove(
                     addPackages.Count > 0 ? addPackages.ToArray() : null,
                     removePackages.Count > 0 ? removePackages.ToArray() : null);
+
+            return true;
         }
+
+        public static bool CurrentlyPendingRefresh => m_AddAndRemoveRequest != null && !m_AddAndRemoveRequest.IsCompleted;
     }
 }

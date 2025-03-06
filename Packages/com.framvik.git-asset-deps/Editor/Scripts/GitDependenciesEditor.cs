@@ -31,8 +31,10 @@ namespace Framvik.GitAssets.Dependencies
             }
             if (GUILayout.Button("Refresh Git Packages"))
             {
-                m_PendingChanges = false;
-                GitAssetDependencyEvents.RefreshGitDependencies();
+                if (GitAssetDependencyEvents.RefreshGitDependencies())
+                {
+                    m_PendingChanges = false;
+                }
             }
         }
     }
