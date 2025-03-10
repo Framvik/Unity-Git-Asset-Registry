@@ -20,6 +20,12 @@ namespace Framvik.GitAssets.Dependencies
         private static void InitializeOnLoad()
         {
             Events.registeredPackages += OnRegisteredPackages;
+            Events.registeringPackages += RegisteringPackages; ;
+        }
+
+        private static void RegisteringPackages(PackageRegistrationEventArgs obj)
+        {
+            RefreshGitDependencies();
         }
 
         private static void OnRegisteredPackages(PackageRegistrationEventArgs obj)
